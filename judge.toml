@@ -8,5 +8,5 @@ image = { source = "dockerfile", path = ".", tag = "pascal-lex-example" }
 
 # 假如你用的是 Java
 run = [
-  "./program Homework01",
+  "./Homework01 $input",
 ]
