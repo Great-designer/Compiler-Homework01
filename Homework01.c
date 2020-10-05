@@ -135,9 +135,11 @@ int getsym()//返回类别码
 			case','://判断是否逗号 
 				symbol=COMMASY;
 			break;
+			case-1:
+				symbol=-1;
+			break;
 			default:
 				symbol=0;
-//			return -1;
 		}
 	}
 	return 0;
@@ -199,15 +201,14 @@ int main(int argc,char *argv[])
 			case 16:
 				printf("Assign\n");
 			break;
+			case -1:
+				return 0;
+			break;
 			default:
 				printf("Unknown\n");
 			return 0;
 		}
 		t=getsym();
 	}
-//	if(t==-1)
-//	{
-//		printf("Unknown\n");
-//	}
 	fclose(in);
 }
