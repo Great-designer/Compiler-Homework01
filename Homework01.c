@@ -136,7 +136,8 @@ int getsym()//返回类别码
 				symbol=COMMASY;
 			break;
 			default:
-			return -1;
+				symbol=0;
+//			return -1;
 		}
 	}
 	return 0;
@@ -204,9 +205,9 @@ int main(int argc,char *argv[])
 		}
 		t=getsym();
 	}
-	if(t==-1)
-	{
-		printf("Unknown\n");
-	}
+//	if(t==-1)
+//	{
+//		printf("Unknown\n");
+//	}
 	fclose(in);
 }
