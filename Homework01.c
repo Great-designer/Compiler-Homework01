@@ -135,7 +135,7 @@ int getsym()//返回类别码
 			case','://判断是否逗号 
 				symbol=COMMASY;
 			break;
-			case-1:
+			case EOF:
 				symbol=-1;
 			break;
 			default:
