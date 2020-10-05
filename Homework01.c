@@ -64,22 +64,25 @@ int reserver()
 	}
 }
 
+FILE*in;
+
+
 int getsym()//返回类别码 
 {
 	cc=' ';
 	memset(token,0,sizeof(token));
 	while(isspace(cc))//读字符，跳空格、换行和Tab 
 	{
-		cc=getchar();
+		cc=fgetc(in);
 	}
 	if(isalpha(cc))//判断当前字符是否一个字母 
 	{
 		while(isalpha(cc)||isdigit(cc))//将字符拼接成字符串 
 		{
 			strncat(token,&cc,1);
-			cc=getchar(); 
+			cc=fgetc(in); 
 		}
-		ungetc(cc,stdin);//指针后退一个字符
+		ungetc(cc,in);//指针后退一个字符
 		int resultValue=reserver();//resultValue查找保留字的返回值 
 		if(resultValue==0)//token中字符串为标识符 
 		{
@@ -95,9 +98,9 @@ int getsym()//返回类别码
 		while(isdigit(cc))//将字符拼接成整数 
 		{
 			strncat(token,&cc,1);
-			cc=getchar();
+			cc=fgetc(in);
 		}
-		ungetc(cc,stdin);
+		ungetc(cc,in);
 		num=atoi(token);//将token中的字符串转换为整数 
 		symbol=INTSY;//此时识别的单词是整数 
 	}
@@ -106,14 +109,14 @@ int getsym()//返回类别码
 		switch(cc)
 		{
 			case':'://判断当前字符是否冒号 
-				cc=getchar();
+				cc=fgetc(in);
 				if(cc=='=')//判断是否赋值符号 
 				{
 					symbol=ASSIGNSY;
 				}
 				else
 				{
-					ungetc(cc,stdin);
+					ungetc(cc,in);
 					symbol=COLONSY;
 				}
 			break;
@@ -139,8 +142,9 @@ int getsym()//返回类别码
 	return 0;
 }
 
-int main()
+int main(int argc,char *argv[])
 {
+	in=fopen(argv[1],"r");
 	int t=getsym();
 	while(t==0)
 	{
@@ -169,7 +173,7 @@ int main()
 			break;
 			case 8:
 				printf("Ident(%s)\n",token);
-			break;
+			break; 
 			case 9:
 				printf("Int(%d)\n",num);
 			break;
@@ -204,4 +208,5 @@ int main()
 	{
 		printf("Unknown\n");
 	}
+	fclose(in);
 }
