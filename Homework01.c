@@ -9,14 +9,6 @@ int num;
 
 int symbol;
 
-const int BEGINSY=1;
-const int ENDSY=2;
-const int FORSY=3;
-const int DOSY=4;
-const int IFSY=5;
-const int THENSY=6;
-const int ELSESY=7;
-
 const int IDSY=8;
 const int INTSY=9;
 
@@ -145,11 +137,10 @@ int getsym()//返回类别码
 	return 0;
 }
 
-int main(int argc,char *argv[])
+int main(__attribute__((unused)) int argc,char *argv[])
 {
 	in=fopen(argv[1],"r");
-	int t=getsym();
-	while(t==0)
+	while(1)
 	{
 		switch(symbol)
 		{
@@ -208,7 +199,7 @@ int main(int argc,char *argv[])
 				printf("Unknown\n");
 			return 0;
 		}
-		t=getsym();
+        getsym();
 	}
 	fclose(in);
 }
